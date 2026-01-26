@@ -1,6 +1,7 @@
 ## YOLO format conversion
 # This program converts the text file labelings in YOLO into the csv file.
 # Each txt file denotes the object detection in 1 frame will be transferred to 1 row of labeling in the csv file.
+# The bounding box annotations can be therefore transferred in a Python format for further analysis and visualization.
 # Contributor: Jiayue Yang, 2024-09-05
 
 # Update:
@@ -16,22 +17,20 @@ import cv2
 
 
 # labeling index to name
-#label2name = {0: 'Aubergine', 1: 'Asperge', 2: 'Artichaut'}
-label2name = {0: 'touch', 1: 'hand'}
+label2name = {0: 'x', 1: 'y'} # (to edit) label class index: "label name"
 
 # initiate frame number counting from 1
 frame = 1
 
 # define output csv path
-csv_path = 'C:\\Users\\jyang291\\Desktop\\concat_labels.csv'
+csv_path = 'output_csv' # (to edit) output path of the csv file
 
 """
 Step 1: Extract the total frame number, width, and height of the detection video
 """
 
 # detection video path
-#vid_path = "C:\\Users\\jyang291\\Desktop\\bird_cage\\cropped.mp4"
-vid_path = "C:\\Users\\jyang291\\Desktop\\hand_touch\\IMG_0607.avi"
+vid_path = "YOLO_detection_result_video" # (to edit) directory of the labeled video by YOLO 
 
 # read video
 vid = cv2.VideoCapture(vid_path)
@@ -54,7 +53,7 @@ conversion = []
 while frame <= length:
     try:
         # load the txt file
-        file_path = 'C:\\Users\\jyang291\\Desktop\\hand_touch\\labels\\IMG_0607_%s.txt' % frame
+        file_path = 'video_name_%s.txt' % frame # (to edit) the name of the annotated video by YOLO, corresponding to each frame labeling
 
         # read the file as dataframe
         df = pd.read_csv(file_path, delimiter='\t', header=None)
@@ -109,7 +108,7 @@ print("Labeling csv file saved.")
 
 
 
-"""
+
 ### Step 4: Draw the rectangle on the image to confirm
 
 # display the image and the rectangle drawn
@@ -130,7 +129,8 @@ rect = patches.Rectangle((py_format.loc[2, 'X'], py_format.loc[2, 'Y']),
 # Add the patch to the Axes
 ax.add_patch(rect)
 plt.show()
-"""
+
+
 
 
 
