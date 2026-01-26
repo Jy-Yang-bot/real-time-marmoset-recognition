@@ -17,7 +17,10 @@ The pipeline aims to identify common marmosets (_Callithrix jacchus_) in the lab
 The main libraries involved in this real-time pipeline are as follows:
 - pytorch
 - ultralytics
-- 
+- pandas
+- numpy
+- cv2
+- matplotlib.pyplot
 # Usage
 
 
