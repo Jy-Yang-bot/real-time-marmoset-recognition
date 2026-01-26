@@ -6,3 +6,17 @@ Example applications:
 - Identifying animals in a real-time setting during behavioral experiments.
 - Measuring the duration of animal presence within a designed experimental space.
 
+
+# Prerequisites
+
+
+# Libraries Dependency
+
+
+# Usage
+
+
+# Pre-trained Model (YOLOv8)
+
+
+# References
