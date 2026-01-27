@@ -41,8 +41,8 @@ MATLAB:
 
 # Usage
 The ultralytic model (YOLOv8) can be installed and used in virtual environments, such as Anaconda Prompt, by running:
-```
-- pip install ultralytics
+```markdown
+pip install ultralytics
 ```
 
 
