@@ -15,12 +15,12 @@ The pipeline aims to identify common marmosets (_Callithrix jacchus_) in the lab
 
 # Libraries Dependency
 The main libraries involved in this real-time pipeline are as follows:
-- pytorch
-- ultralytics
-- pandas
-- numpy
-- cv2
-- matplotlib.pyplot
+- ultralytics: base model for object detection, segmentation, and classification
+- pyTorch: deep learning networks (CNN) used for YOLO training were written in pyTorch
+- pandas: reading and modifying csv file
+- numpy: editing multi-dimensional array objects
+- cv2: OpenCV (Open Source Computer Vision Library), image processing
+- matplotlib.pyplot: plotting metrics and automatic labeling results
 # Usage
 
 
