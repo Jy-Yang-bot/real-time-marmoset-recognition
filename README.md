@@ -21,6 +21,10 @@ The main libraries involved in this real-time pipeline are as follows:
 - numpy: editing multi-dimensional array objects
 - cv2: OpenCV (Open Source Computer Vision Library), image processing
 - matplotlib.pyplot: plotting metrics and automatic labeling results
+- json: JavaScript Object Notation, light-weighted, readable format to store detection results
+- os: assessing files from computer hardware interface
+- time: measuring time for the real-time operations
+- collections: deque, Counter, removing and counting the elements in the detection results (of a short predefined period)
 # Usage
 
 
