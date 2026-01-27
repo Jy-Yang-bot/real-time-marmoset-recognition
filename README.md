@@ -15,6 +15,7 @@ The pipeline aims to identify common marmosets (_Callithrix jacchus_) in the lab
 
 # Libraries Dependency
 The main libraries involved in this real-time pipeline are as follows:
+Python:
 - ultralytics: base pipeline model for object detection, segmentation, and classification
 - pyTorch: deep learning networks (CNN) used for YOLO training were written in pyTorch
 - pandas: reading and modifying csv file
@@ -25,6 +26,9 @@ The main libraries involved in this real-time pipeline are as follows:
 - os: assessing files from computer hardware interface
 - time: measuring time for the real-time operations
 - collections: deque, Counter, removing and counting the elements in the detection results (of a short predefined period)
+MATLAB:
+- imwrite: saving and processing the extracted images
+- tabulate: counting label frequencies to determine the most commonly detected identity
 # Usage
 
 
