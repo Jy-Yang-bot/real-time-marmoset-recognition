@@ -38,11 +38,14 @@ Python:
 MATLAB:
 - imwrite: saving and processing the extracted images
 - tabulate: counting label frequencies to determine the most commonly detected identity
+
 # Usage
+The ultralytic model (YOLOv8) can be installed and used in virtual environments, such as Anaconda Prompt, by running:
+- pip install ultralytics
 
 
 # Pre-trained Model (YOLOv8)
-We start the real-time marmoset recognition model with the pre-trained YOLOv8 models (YOLOv8 nano, YOLOv8 small, and YOLOv8 medium), using weights pretrained on the COCO dataset. The training of face classification model can start with the pre-trained YOLOv8 weights, with no need to start from scratch. The pre-trained YOLOv8 models involved in this pipeline are downloaded from https://docs.ultralytics.com/models/yolov8/#detection-coco (Jocher et al., 2023), while users can select the optimal pre-trained model based on image properties. 
+We start the real-time marmoset recognition model with the pre-trained YOLOv8 models (YOLOv8 nano, YOLOv8 small, and YOLOv8 medium), using models trained on images from the COCO dataset. The training of face classification model can start with the pre-trained YOLOv8 weights, with no need to start from scratch. The pre-trained YOLOv8 models involved in this pipeline are downloaded from https://docs.ultralytics.com/models/yolov8/#detection-coco (Jocher et al., 2023), while users can select the optimal pre-trained model based on image properties. 
 
 # References
 - Jocher, G., Chaurasia, A., Qiu, J., 2023. Ultralytics YOLOv8.
