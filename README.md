@@ -1,6 +1,7 @@
 # Real-time-marmoset-recognition
 This program was designed for real-time recognition of different freely moving marmosets, based on unique facial features, using the YOLOv8 algorithms.
 <br />
+<br />
 Example applications:
 - Recognizing freely moving individuals in a common marmoset family.
 - Identifying animals in a real-time setting during behavioral experiments.
@@ -15,6 +16,7 @@ The pipeline aims to identify common marmosets (_Callithrix jacchus_) in the lab
 
 # Libraries Dependency
 The main libraries involved in this real-time pipeline are as follows:
+<br />
 <br />
 Python:
 - ultralytics: base pipeline model for object detection, segmentation, and classification
