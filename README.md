@@ -33,8 +33,8 @@ Python:
 - json: JavaScript Object Notation, light-weighted, readable format to store detection results
 - os: assessing files from computer hardware interface
 - time: measuring time for the real-time operations
-- collections: deque, Counter, removing and counting the elements in the detection results (of a short predefined period)
-<br />MATLAB:
+- collections: deque, Counter, removing and counting the elements in the detection results (of a short predefined period) <br />
+MATLAB:
 - imwrite: saving and processing the extracted images
 - tabulate: counting label frequencies to determine the most commonly detected identity
 # Usage
