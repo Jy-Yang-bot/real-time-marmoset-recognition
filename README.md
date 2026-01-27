@@ -16,7 +16,7 @@ The hardware requirements for running ultralytics (YOLOv8) models are:
 - Python 3.8+
 - PyTorch 1.10+
 - NVIDIA GPU with CUDA: for pyTorch
-- >6GB RAM: 6GB is minimum and 8GB+ is preferred for better computation
+- sufficient RAM storage: 6GB is minimum and 8GB+ is preferred for better computation
 - free disk space: differ by sizes of imaging dataset and sotrage required for model training. usually 20-50GB
 
 # Libraries Dependency
