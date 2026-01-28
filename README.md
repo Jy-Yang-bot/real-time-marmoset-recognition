@@ -44,7 +44,8 @@ The ultralytic model (YOLOv8) can be installed and used in virtual environments,
 ```markdown
 pip install ultralytics
 ```
-https://github.com/Jy-Yang-bot/real-time-marmoset-recognition/tree/main/.workflow
+For full installation instructions, training processes, and example files, see the workflow folder of this project:
+- https://github.com/Jy-Yang-bot/real-time-marmoset-recognition/tree/main/.workflow 
 
 
 # Pre-trained Model (YOLOv8)
