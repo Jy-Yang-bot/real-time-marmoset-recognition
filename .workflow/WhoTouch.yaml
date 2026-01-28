@@ -1,0 +1,6 @@
+train: C:\Users\jiayue\Desktop\YOLO\WhoTouch\train
+val: C:\Users\jiayue\Desktop\YOLO\WhoTouch\val
+
+nc: 6
+
+names: ["Adult1", "Adult2", "Adult3", "collar_Adult1", "collar_Adult2", "collar_Adult3"]
