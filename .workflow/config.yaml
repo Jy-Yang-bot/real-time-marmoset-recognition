@@ -1,9 +1,10 @@
 # directory of training and validation datasets for YOLO
-train: C:\Users\YOLO\train # (to edit, directory of the training folder with images and corresponding manual labels)
-val: C:\Users\YOLO\val # (to edit, directory of the validation folder with images and corresponding manual labels)
+train: C:\Users\marmoset_recognition\train # (to edit, directory of the training folder with images and corresponding manual labels)
+val: C:\Users\marmoset_recognition\val # (to edit, directory of the validation folder with images and corresponding manual labels)
 
 # number of label classes
 nc: 3 # (to edit, number of label class, e.g. 3)
 
 # class names
 names: ["x", "y", "z"] # (to edit, name the label class, e.g. ["x", "y", "z"])
+
