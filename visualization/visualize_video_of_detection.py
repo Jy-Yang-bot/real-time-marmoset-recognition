@@ -1,61 +1,64 @@
+"""
+Generate a video to visualize the detection results throughout the YOLO-prediced videos.
+- Input: annotated video from YOLO, folder of labelings of this video, and output video name.
+- Output: timeline videos of the detection labels and the annotated video.
+- The trained YOLO model can detect and predict labels from one video
+- Some videos may have more than 1 label class, thus it can be useful if all detected labels can be visualize as a whole
+
+Contributor: Jiayue Yang, 2025-06-07
+"""
+# import libraries
 import cv2
 import numpy as np
 import os
 import re
 
-# ================= USER SETTINGS =================
-video_path = '11monMar.avi'
-detections_folder = 'C:\\Users\\Alienware\\PycharmProjects\\whoTouch_perform\\labels_11monMar'
-output_video = 'video_5.mp4'
+# (to edit) define the yolo annotated video, labeling folders, and the output video directory
+video_path = 'yolo_predicted_video.avi'
+detections_folder = 'dir_labeling_yolo_predicted_video'
+output_video = 'dir_output_vid.mp4'
 
-output_width = 1280        # width of the output video
-video_scale = 0.6          # fraction of width for the video on top
-margin_height = 30         # space between video and timeline
-timeline_height = 500      # total height of timeline plot
-timeline_margin = 150      # horizontal margin on left and right
-label_x = 30               # distance of face/collar labels from left edge of output video
-# =================================================
+# (to edit) preferred sizes and properties of the output video
+output_width = 1280
+video_scale = 0.6
+margin_height = 30
+timeline_height = 500
+timeline_margin = 150
+label_x = 30
 
-# -------- Class definitions --------
-classes = [0, 1, 2, 3]  # 0=face, 1=collar
-class_names = {0: 'Young1', 1: 'collar_Young1', 2: 'Young2', 3: 'collar_Young2'}
-class_colors = {
-    0: (255, 0, 0),  # face = blue
-    1: (255, 255, 0),  # collar = cyan
-    2: (230, 165, 230),   # class 2 = white
-    3: (0, 255, 0)        # class 3 = lime green
-
+# define the yolo model label classes (those may appear in the yolo annotated video)
+classes = [0, 1]  # (to edit) class indices --> corresponding to label class name
+class_names = {0: 'x', 1: 'y'} # (to edit) class indices : label class name
+class_colors = { # (to edit) the preferred color for each class label --> can modify this to make it same as the YOLO annotation colors (optional)
+    0: (255, 0, 0),  # class 0 = blue
+    1: (255, 255, 0),  # class 1 = cyan
 }
 
-# ---------- Open video ----------
+# load the yolo annotated video
 cap = cv2.VideoCapture(video_path)
 if not cap.isOpened():
-    raise RuntimeError("❌ Could not open video")
-
+    raise RuntimeError("ERROR: could not load video")
+# get the video properties
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 orig_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 orig_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
-print(f"Video: {total_frames} frames @ {fps} fps")
-
-# ---------- Compute resized video size ----------
+# put this video in thte resized output video
 resized_width = int(output_width * video_scale)
 resized_height = int(orig_height * resized_width / orig_width)
 
-# ---------- Timeline layout ----------
-timeline_width = output_width - 2 * timeline_margin  # smaller width
+# create a timeline layout
+timeline_width = output_width - 2 * timeline_margin
 num_classes = len(classes)
 row_height = timeline_height // num_classes
-
-# Each frame maps to pixel width on the timeline
 px_per_frame = max(1, timeline_width / total_frames)
+timeline = np.ones((timeline_height, timeline_width, 3), dtype=np.uint8) * 255  # (to eedit) make the output video white background
 
-timeline = np.ones((timeline_height, timeline_width, 3), dtype=np.uint8) * 255  # white background
-
-# ---------- Index detection files ----------
+# access the labeling folder
 det_map = {}
-pattern = re.compile(r'11monMar_(\d+)\.txt')
+pattern = re.compile(r'yolo_predicted_video_(\d+)\.txt') # (to edit) if the labeling .txt files have specific startings
+# iterate through the labelings per frame and match them with the timeline
 for fname in os.listdir(detections_folder):
     match = pattern.match(fname)
     if match:
@@ -64,9 +67,7 @@ for fname in os.listdir(detections_folder):
             os.path.join(detections_folder, fname)
         )
 
-print(f"Indexed {len(det_map)} detection frames")
-
-# ---------- Build FULL timeline once ----------
+# put the labeling timeline + yolo annotated video together
 for frame_idx in range(total_frames):
     x_start = int(frame_idx * px_per_frame)
     x_end = int((frame_idx + 1) * px_per_frame)
@@ -74,7 +75,6 @@ for frame_idx in range(total_frames):
         break
     if x_end > timeline_width:
         x_end = timeline_width
-
     present = {cid: False for cid in classes}
     if frame_idx in det_map:
         for txt_path in det_map[frame_idx]:
@@ -83,27 +83,26 @@ for frame_idx in range(total_frames):
                     cid = int(line.strip().split()[0])
                     if cid in present:
                         present[cid] = True
-
-    # Draw colored bars for each class
+    # draw the color bar for each detected label class
     for i, cid in enumerate(classes):
         if present[cid]:
             y0 = i * row_height
             y1 = (i + 1) * row_height
             timeline[y0:y1, x_start:x_end] = class_colors[cid]
 
-# ---------- Output writer ----------
+# write the output video
 out_height = resized_height + margin_height + timeline_height
+# save video
 out = cv2.VideoWriter(
     output_video,
-    cv2.VideoWriter_fourcc(*'mp4v'),
+    cv2.VideoWriter_fourcc(*'mp4v'), # (optional) it can be saved as .mov or .avi as well, if preferred
     fps,
     (output_width, out_height)
 )
 
-# ---------- Playback loop ----------
+# playback loop
 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 frame_idx = 0
-
 font_scale = 1.2
 thickness = 2
 
@@ -112,17 +111,15 @@ while True:
     if not ret:
         break
 
-    # Resize video
+    # video resizing
     frame_resized = cv2.resize(frame, (resized_width, resized_height))
-
-    # White background canvas
+    # white background
     canvas = np.ones((out_height, output_width, 3), dtype=np.uint8) * 255
 
-    # Place video on top, horizontally centered
+    # yolo annotated video on top
     x_offset = (output_width - resized_width) // 2
     canvas[0:resized_height, x_offset:x_offset+resized_width] = frame_resized
-
-    # Copy timeline and draw moving playhead
+    # timeline of the detected label classes at the bottom
     timeline_vis = timeline.copy()
     x_play = int(frame_idx * px_per_frame)
     if x_play < timeline_width:
@@ -130,16 +127,15 @@ while True:
             timeline_vis,
             (x_play, 0),
             (x_play, timeline_height),
-            (0, 0, 0),  # black line
+            (0, 0, 0),  # sliding bar = a black line
             3
         )
-
-    # Place timeline centered under video
+    # ensure that the timeline is centered to the output video
     x_t_offset = timeline_margin
     canvas[resized_height+margin_height:resized_height+margin_height+timeline_height,
            x_t_offset:x_t_offset+timeline_width] = timeline_vis
 
-    # ---------- Draw labels on the left of output video ----------
+    # put the label names on the far left, besides the timeline
     for i, cid in enumerate(classes):
         y = resized_height + margin_height + int((i + 0.7) * row_height)
         cv2.putText(
@@ -158,6 +154,9 @@ while True:
     if frame_idx % 100 == 0:
         print(f"Rendered frame {frame_idx}/{total_frames}")
 
+# end video editing
 cap.release()
 out.release()
-print("✅ Video saved:", output_video)
+# print an ending statement
+print("Video completed, the output is saved at:", output_video)
+
