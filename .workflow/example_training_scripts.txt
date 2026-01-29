@@ -1,0 +1,26 @@
+# Aim: This file is an example scripts to train a YOLO model
+# The config.yaml file, which contains the training and validation dataset, will be used with this script
+# Contributor: Jiayue Yang
+
+# create a virtual environment to perform YOLO training and validation
+conda create -n environment_name python=3.9
+conda activate environment_name
+
+# install ultralytics library
+pip install ultralytics
+
+# ensure pyTorch is installed and usable
+python
+# import and check the torch version, and if cuda is available with it
+--> import torch
+--> torch.__version__
+--> torch.cuda.is_available() == TRUE # expected = TRUE, if not, CUDA can be installed in torch website https://pytorch.org/get-started/locally/
+# if everything looks good, and exit and proceed with YOLO training
+--> exit()
+
+# Example command to train the model
+yolo task=detect mode=train epochs=n data=config.yaml model=pre_trained_model.pt # (to edit) the training epoch, pre-trained model can be found in YOLO ultralytics website
+# Example command to predict the labels in image/video files
+yolo task=detect mode=predict model=best.pt show=True source=.mp4/.jpg
+
+# Note: The complete command and variables of YOLO can be found in https://docs.ultralytics.com/modes/train/.
