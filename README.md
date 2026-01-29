@@ -46,7 +46,20 @@ pip install ultralytics
 ```
 For full installation instructions, training processes, and example files, see the workflow folder of this project:
 - https://github.com/Jy-Yang-bot/real-time-marmoset-recognition/tree/main/.workflow 
-
+<br />
+The pre-processing folder in this repository includes codes to:
+- Extract frames from the collected video
+- Detection label modification in the YOLO labeling folder
+  - Usually used for results from automatic identity extraction model, then the modified labelings can be used in new multi-marmoset facial recognition model training
+<br />
+The real-time marmoset recognition folder in this repository includes codes to:
+- Perform the real-time marmoset recognition based on the trained detection model of the subject marmosets
+<br />
+The visualization folder in this repository includes codes to:
+- Convert the YOLO labelings .txt files into one .csv file
+- Plot the learning curves of training of the YOLO model
+- Compute the detection label classes' similarity
+- Generate videos to visualize the detection results throughout a video
 
 # Pre-trained Model (YOLOv8)
 We start the real-time marmoset recognition model with the pre-trained YOLOv8 models (YOLOv8 nano, YOLOv8 small, and YOLOv8 medium), using models trained on images from the COCO dataset. The training of face classification model can start with the pre-trained YOLOv8 weights, with no need to start from scratch. The pre-trained YOLOv8 models involved in this pipeline are downloaded from https://docs.ultralytics.com/models/yolov8/#detection-coco (Jocher et al., 2023), while users can select the optimal pre-trained model based on image properties. 
