@@ -46,8 +46,7 @@ pip install ultralytics
 ```
 For full installation instructions, training processes, and example files, see the workflow folder of this project:
 - https://github.com/Jy-Yang-bot/real-time-marmoset-recognition/tree/main/.workflow 
-<br />
-<br />
+
 The pre-processing folder in this repository includes codes to:
 - Extract frames from the collected video
 - Detection label modification in the YOLO labeling folder
