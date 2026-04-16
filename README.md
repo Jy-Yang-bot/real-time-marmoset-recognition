@@ -12,7 +12,7 @@ The pipeline aims to identify common marmosets, _Callithrix jacchus_, in the lab
 - https://github.com/ultralytics/ultralytics
 
 # Relevant Publication
-This pipeline is available online as a preprint on biorxiv: https://doi.org/10.64898/2026.02.02.703330
+This pipeline is available online as a preprint on biorxiv: https://doi.org/10.64898/2026.02.02.703330 <br />
 The preprint is now published on eLife: https://doi.org/10.7554/eLife.110932.1
 
 # Prerequisites
