@@ -84,7 +84,8 @@ while cap.isOpened():
                 continue
             # replace with weighted name if marmoset bead colors detected, otherwise append the detected subject name
             # weighted detection --> if xx color belongs to x individual
-            # (to edit) bead color-subject name weight can be adjusted
+            # (to edit) bead color-subject name weight can be adjusted based on experimental setup
+            # example: weight = 5 (maximum weight)
             if label == 'xx':
                 all_detect.extend(['x']*5)
             elif label == 'yy':
