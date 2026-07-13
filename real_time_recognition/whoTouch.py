@@ -86,7 +86,7 @@ while cap.isOpened():
             # weighted detection --> if xx color belongs to x individual
             # (to edit) bead color-subject name weight can be adjusted based on experimental setup
             # example: weight = 5 (maximum weight suggested when collar labels are very rare to see, should not go further)
-            # if the color label can be seen momentarily, could use 2-3
+            # if the color label can be seen momentarily but way less than faces, could use weight=2
             if label == 'xx':
                 all_detect.extend(['x']*5)
             elif label == 'yy':
